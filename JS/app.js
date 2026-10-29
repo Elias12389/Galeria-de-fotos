@@ -74,4 +74,4 @@ function Login() {
 }
 
 //Chamando o login para que ele carregue na tela
-fotografias();
+Login();
