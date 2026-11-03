@@ -23,11 +23,26 @@ async function buscarUsuario(nomeUsuario, mensagemErro, senha) {
   }
 }
 
-function fotografias() {
+async function fotografias() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/photos");
+  const fotos = await response.json();
+
+  const consultarFotos = await fotos.map((foto) => {
+    return (app.innerHTML = /*html */ `
+        <h1>${foto}</h1>
+      `);
+  });
+
+  console.log(consultarFotos);
+  //instalei uma extensão que me ajudou a escrever o código como se fosse em um arquivo HTML
   app.innerHTML = /*html*/ `
         <section class="d-flex justify-content-center align-items-center flex-column min-vh-100">
             <p class="fs-3 fw-bold text-success">Usuário logado!</p>
             <p>Próximas atualizações em breve!</p>
+            <div class="card ">
+              <h1>${consultarFotos.title}</h1>
+              <img src="${consultarFotos.url}" alt="" srcset="">
+            </div>
             <button id="logout" class="btn btn-danger w-25">Sair</button>
         </section>
     `;
@@ -74,4 +89,4 @@ function Login() {
 }
 
 //Chamando o login para que ele carregue na tela
-Login();
+fotografias();

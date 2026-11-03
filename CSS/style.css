@@ -3,3 +3,8 @@ input {
   border-right: none;
   border-top: none;
 }
+
+img {
+  width: 32px;
+  height: 32px;
+}
