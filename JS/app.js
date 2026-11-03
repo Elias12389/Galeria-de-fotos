@@ -27,10 +27,8 @@ async function fotografias() {
   const response = await fetch("https://jsonplaceholder.typicode.com/photos");
   const fotos = await response.json();
 
-  const consultarFotos = await fotos.map((foto) => {
-    return (app.innerHTML = /*html */ `
-        <h1>${foto}</h1>
-      `);
+  const consultarFotos = await fotos.find((foto) => {
+    return foto.id == 1;
   });
 
   console.log(consultarFotos);
