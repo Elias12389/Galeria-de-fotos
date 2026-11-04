@@ -27,19 +27,25 @@ async function fotografias() {
   const response = await fetch("https://jsonplaceholder.typicode.com/photos");
   const fotos = await response.json();
 
-  const consultarFotos = await fotos.find((foto) => {
-    return foto.id == 1;
+  //Método slice(), que serve para percorrer o array só até o elemento 10
+  const fotosOrganizadas = fotos.slice(0, 10);
+
+  //Método map(), serve para percorrer a lista e aplicar um elemento para cada array, criando um novo array
+  const fotosMapeados = fotosOrganizadas.map((foto) => {
+    return `<p>${foto.title}</p> <img src="${foto.thumbnailUrl}" alt="" srcset="" class="thumbnail">`;
   });
 
-  console.log(consultarFotos);
+  //Método join(), junta todos os elementos dentrode uma única string e formata o documento
+  const fotosArrumadas = fotosMapeados.join(" ");
+
   //instalei uma extensão que me ajudou a escrever o código como se fosse em um arquivo HTML
   app.innerHTML = /*html*/ `
         <section class="d-flex justify-content-center align-items-center flex-column min-vh-100">
             <p class="fs-3 fw-bold text-success">Usuário logado!</p>
             <p>Próximas atualizações em breve!</p>
-            <div class="card ">
-              <h1>${consultarFotos.title}</h1>
-              <img src="${consultarFotos.url}" alt="" srcset="">
+            <div class="card align-items-center">
+              ${fotosArrumadas}
+              
             </div>
             <button id="logout" class="btn btn-danger w-25">Sair</button>
         </section>
