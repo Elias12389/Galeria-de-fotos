@@ -30,9 +30,10 @@ async function fotografias() {
   //Método slice(), que serve para percorrer o array só até o elemento 10
   const fotosOrganizadas = fotos.slice(0, 10);
 
+  console.log(fotosOrganizadas);
   //Método map(), serve para percorrer a lista e aplicar um elemento para cada array, criando um novo array
   const fotosMapeados = fotosOrganizadas.map((foto) => {
-    return `<p>${foto.title}</p> <img src="${foto.thumbnailUrl}" alt="" srcset="" class="thumbnail">`;
+    return `<div class="card mb-1"><p>${foto.title}</p> <img src="${foto.thumbnailUrl}" alt="" srcset="" class="thumbnail"></div> `;
   });
 
   //Método join(), junta todos os elementos dentrode uma única string e formata o documento
@@ -42,8 +43,7 @@ async function fotografias() {
   app.innerHTML = /*html*/ `
         <section class="d-flex justify-content-center align-items-center flex-column min-vh-100">
             <p class="fs-3 fw-bold text-success">Usuário logado!</p>
-            <p>Próximas atualizações em breve!</p>
-            <div class="card align-items-center">
+            <div class="align-items-center">
               ${fotosArrumadas}
               
             </div>
@@ -51,6 +51,13 @@ async function fotografias() {
         </section>
     `;
 
+  const miniaturas = document.querySelectorAll(".thumbnail");
+
+  miniaturas.forEach((foto) => {
+    foto.addEventListener("click", () => {
+      alert("Imagem aqui");
+    });
+  });
   const sair = document.querySelector("#logout");
 
   sair.addEventListener("click", () => Login()); //Arrow function não precisa de chaves para satisfazer um único comando!
