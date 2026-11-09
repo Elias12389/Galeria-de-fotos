@@ -4,7 +4,20 @@ input {
   border-top: none;
 }
 
-.thumbnail{
+.thumbnail {
   width: 32px;
   height: 32px;
+}
+
+.imagemAumentada {
+  /*faz com que a imagem se posicione independente do cotainer pai, mas respeitando a janela do navegador*/
+  position: fixed;
+  /*Faz com que o canto superior esquerdo da imagem fique no centro da janela do navegador*/
+  top: 50%;
+  left: 50%;
+  /*Desloca a imagem em 50% da própria largura para a esquerda e 50% da própria altura para cima, centralizando-a*/
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  z-index: 9999;
 }

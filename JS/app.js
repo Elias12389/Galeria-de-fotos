@@ -33,7 +33,7 @@ async function fotografias() {
   console.log(fotosOrganizadas);
   //Método map(), serve para percorrer a lista e aplicar um elemento para cada array, criando um novo array
   const fotosMapeados = fotosOrganizadas.map((foto) => {
-    return `<div class="card mb-1"><p>${foto.title}</p> <img src="${foto.thumbnailUrl}" alt="" srcset="" class="thumbnail"></div> `;
+    return `<div class="card mb-1"><p>${foto.title}</p> <img src="${foto.thumbnailUrl}" data-url="${foto.url}" class="thumbnail"></div> `;
   });
 
   //Método join(), junta todos os elementos dentrode uma única string e formata o documento
@@ -51,11 +51,14 @@ async function fotografias() {
         </section>
     `;
 
+  //Serve para selecionar todos os elementos com a classe miniatura, colocando eles dentro de uma lista
   const miniaturas = document.querySelectorAll(".thumbnail");
 
+  //ForEach() para poder acessar cada miniatura e seus atributos dentro do innerHTML
   miniaturas.forEach((foto) => {
     foto.addEventListener("click", () => {
-      alert("Imagem aqui");
+      foto.src = foto.dataset.url;
+      foto.classList.toggle("imagemAumentada");
     });
   });
   const sair = document.querySelector("#logout");
