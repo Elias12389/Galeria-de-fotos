@@ -18,6 +18,10 @@ input {
   /*Desloca a imagem em 50% da própria largura para a esquerda e 50% da própria altura para cima, centralizando-a*/
   transform: translate(-50%, -50%);
   width: 500px;
+  background-color: rgb(222, 255, 255);
+  padding: 100px;
+  box-shadow: 5px 7px 1px rgba(0, 0, 0, 0.24);
+  border-radius: 30px;
   height: 500px;
   z-index: 9999;
 }

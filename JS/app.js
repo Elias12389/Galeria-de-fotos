@@ -33,7 +33,7 @@ async function fotografias() {
   console.log(fotosOrganizadas);
   //Método map(), serve para percorrer a lista e aplicar um elemento para cada array, criando um novo array
   const fotosMapeados = fotosOrganizadas.map((foto) => {
-    return `<div class="card mb-1"><p>${foto.title}</p> <img src="${foto.thumbnailUrl}" data-url="${foto.url}" class="thumbnail"></div> `;
+    return `<div class="card mb-1 background"><p>${foto.title}</p> <img src="${foto.thumbnailUrl}" data-url="${foto.url}" class="thumbnail"></div> `;
   });
 
   //Método join(), junta todos os elementos dentrode uma única string e formata o documento
