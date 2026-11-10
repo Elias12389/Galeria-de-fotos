@@ -38,8 +38,8 @@ async function fotografias() {
   }
   const fotos = await response.json();
 
-  //Método slice(), que serve para percorrer o array só até o elemento 50
-  const fotosOrganizadas = fotos.slice(0, 50);
+  //Método slice(), que serve para percorrer o array só até o elemento 30
+  const fotosOrganizadas = fotos.slice(0, 30);
 
   console.log(fotosOrganizadas);
   //Método map(), serve para percorrer a lista e aplicar um elemento para cada array, criando um novo array
