@@ -26,24 +26,25 @@ async function buscarUsuario(nomeUsuario, mensagemErro, senha) {
 async function fotografias() {
   //Mensagem que indica o carregamento das fotos para o usuário (assim que elas são carregas, o innerHTML é atualizado)
   app.innerHTML = /*html*/ `
-    <p>Carregando fotos...</p>
-    <p>(Isso pode demorar um pouco)</p>
-
+    <div class="d-flex flex-column align-items-center">
+      <section class="text-center bg-body rounded-4 p-3 caixa mt-5">
+        <p>Carregando fotos... <br> (Isso pode demorar um pouco)</p>
+      </section>
+    </div>
   `;
   const response = await fetch("https://jsonplaceholder.typicode.com/photos");
   if (!response.ok) {
-    return (app.innerHTML = /*html */ `<p>Não foi possível carregar as fotografias. Tente novamente mais tarde</p>
-      <button id="logout" class="btn btn-danger w-25">Sair</button>`);
+    return (app.innerHTML = /*html */ `<div class="d-flex flex-column align-items-center mt-5"><section class="text-center bg-body rounded-4 p-3 caixa"><p>Não foi possível carregar as fotografias. <br> Tente novamente mais tarde</p></section></div>`);
   }
   const fotos = await response.json();
 
   //Método slice(), que serve para percorrer o array só até o elemento 10
-  const fotosOrganizadas = fotos.slice(0, 10);
+  const fotosOrganizadas = fotos.slice(0, 50);
 
   console.log(fotosOrganizadas);
   //Método map(), serve para percorrer a lista e aplicar um elemento para cada array, criando um novo array
   const fotosMapeados = fotosOrganizadas.map((foto) => {
-    return `<div class="card mb-1 background"><p>${foto.title}</p> <img src="${foto.thumbnailUrl}" data-url="${foto.url}" data-thumbnail="${foto.thumbnailUrl}" class="thumbnail"></div> `;
+    return `<div class="card mb-1"><p>${foto.title}</p> <img src="${foto.thumbnailUrl}" data-url="${foto.url}" data-thumbnail="${foto.thumbnailUrl}" class="thumbnail"></div> `;
   });
 
   //Método join(), junta todos os elementos dentrode uma única string e formata o documento
@@ -51,13 +52,12 @@ async function fotografias() {
 
   //instalei uma extensão que me ajudou a escrever o código como se fosse em um arquivo HTML
   app.innerHTML = /*html*/ `
-        <section class="d-flex justify-content-center align-items-center flex-column min-vh-100">
-            <p class="fs-3 fw-bold text-success">Usuário logado!</p>
-            <div class="align-items-center">
+        <section class="d-flex justify-content-center align-items-center min-vw-100 flex-column">
+            <h1 class="text-light">Galeria de fotos</h1>
+            <div class="bg-body p-4 rounded-4 ">
               ${fotosArrumadas}
-              
             </div>
-            <button id="logout" class="btn btn-danger w-25">Sair</button>
+            <button id="logout" class="btn btn-danger mt-4 w-25 h-25">Sair</button>
         </section>
     `;
 
@@ -87,7 +87,7 @@ async function fotografias() {
 function Login() {
   app.innerHTML = /*html*/ `
     <section>
-        <form action="" class="d-flex flex-column w-50 m-auto mt-5 " id="formulario">
+        <form action="" class="d-flex flex-column w-50 m-auto mt-5 bg-body p-4 rounded-5 caixa" id="formulario">
             <label for="usuario">Digite o seu nome de usuário:</label>
             <input type="text" name="" id="usuario">
 
@@ -96,7 +96,7 @@ function Login() {
 
             <p class="text-danger" id="mensagemErro"></p>
 
-            <button type="submit" id="entrar" class="btn btn-success">Entrar</button>
+            <button type="submit" id="entrar" class="btn btn-success rounded-4">Entrar</button>
         </form>
     </section>
     
@@ -121,4 +121,4 @@ function Login() {
 }
 
 //Chamando o login para que ele carregue na tela
-fotografias();
+Login();

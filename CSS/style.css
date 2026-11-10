@@ -1,3 +1,12 @@
+body {
+  background: url("../img/fundo-montanhas.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
 input {
   border-left: none;
   border-right: none;
@@ -5,16 +14,20 @@ input {
 }
 
 .thumbnail {
+  cursor: pointer;
   width: 32px;
   height: 32px;
 }
 
 /*Faz com que, ele selecione e somente aplique essa regra quando o .card e o .imagemAumentada estiverem ativos, para ai aplicar o .thumbnail*/
 .card.imagemAumentada .thumbnail {
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: 100%;
+  max-width: 480px;
+  max-height: 400px;
 }
 
+/*foi necessário modificar o card junto do imagemAumentada devido o comportamento do bootstrap*/
 .card.imagemAumentada {
   /*faz com que a imagem se posicione independente do cotainer pai, mas respeitando a janela do navegador*/
   position: fixed;
@@ -23,14 +36,17 @@ input {
   left: 50%;
   /*Desloca a imagem em 50% da própria largura para a esquerda e 50% da própria altura para cima, centralizando-a*/
   transform: translate(-50%, -50%);
-  width: 600px;
+  width: 100%;
+  max-width: 500px;
   display: flex;
   align-items: center;
   background-color: rgb(222, 255, 255);
   box-shadow: 5px 7px 1px rgba(0, 0, 0, 0.24);
   border-radius: 30px;
-  height: 600px;
+  height: 100%;
+  max-height: 500px;
   z-index: 9999;
+  text-align: center;
 }
 
 img {
@@ -44,4 +60,9 @@ img {
 .card.imagemAumentada p {
   font-size: larger;
   font-weight: bolder;
+}
+
+/*Estilizações das mensagens de carregamento/erro*/
+.caixa {
+  box-shadow: 5px 10px 2px rgba(0, 0, 0, 0.24);
 }
