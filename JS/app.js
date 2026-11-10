@@ -33,7 +33,7 @@ async function fotografias() {
   console.log(fotosOrganizadas);
   //Método map(), serve para percorrer a lista e aplicar um elemento para cada array, criando um novo array
   const fotosMapeados = fotosOrganizadas.map((foto) => {
-    return `<div class="card mb-1 background"><p>${foto.title}</p> <img src="${foto.thumbnailUrl}" data-url="${foto.url}" class="thumbnail"></div> `;
+    return `<div class="card mb-1 background"><p class="titulo">${foto.title}</p> <img src="${foto.thumbnailUrl}" data-url="${foto.url}" class="thumbnail"></div> `;
   });
 
   //Método join(), junta todos os elementos dentrode uma única string e formata o documento
@@ -58,7 +58,11 @@ async function fotografias() {
   miniaturas.forEach((foto) => {
     foto.addEventListener("click", () => {
       foto.src = foto.dataset.url;
-      foto.classList.toggle("imagemAumentada");
+      //Vai selecionar o elemento pai daquele objeto, permitindo pegar o titulo da div daquele elemento
+      const fotoTitulo =
+        foto.parentElement.querySelector(".titulo").textContent;
+
+      foto.parentElement.classList.toggle("imagemAumentada");
     });
   });
   const sair = document.querySelector("#logout");

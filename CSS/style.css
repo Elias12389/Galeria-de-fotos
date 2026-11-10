@@ -9,7 +9,13 @@ input {
   height: 32px;
 }
 
-.imagemAumentada {
+/*Faz com que, ele selecione e somente aplique essa regra quando o .card e o .imagemAumentada estiverem ativos, para ai aplicar o .thumbnail*/
+.card.imagemAumentada .thumbnail {
+  width: 500px;
+  height: 500px;
+}
+
+.card.imagemAumentada {
   /*faz com que a imagem se posicione independente do cotainer pai, mas respeitando a janela do navegador*/
   position: fixed;
   /*Faz com que o canto superior esquerdo da imagem fique no centro da janela do navegador*/
@@ -17,11 +23,21 @@ input {
   left: 50%;
   /*Desloca a imagem em 50% da própria largura para a esquerda e 50% da própria altura para cima, centralizando-a*/
   transform: translate(-50%, -50%);
-  width: 500px;
+  width: 600px;
+  display: flex;
+  align-items: center;
   background-color: rgb(222, 255, 255);
-  padding: 100px;
   box-shadow: 5px 7px 1px rgba(0, 0, 0, 0.24);
   border-radius: 30px;
-  height: 500px;
+  height: 600px;
   z-index: 9999;
+}
+
+.card.imagemAumentada img {
+  border-radius: 20px;
+}
+
+.card.imagemAumentada p {
+  font-size: larger;
+  font-weight: bolder;
 }
