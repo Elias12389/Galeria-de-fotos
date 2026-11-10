@@ -33,6 +33,10 @@ input {
   z-index: 9999;
 }
 
+img {
+  border-radius: 10px;
+}
+
 .card.imagemAumentada img {
   border-radius: 20px;
 }

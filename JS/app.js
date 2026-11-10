@@ -24,7 +24,17 @@ async function buscarUsuario(nomeUsuario, mensagemErro, senha) {
 }
 
 async function fotografias() {
+  //Mensagem que indica o carregamento das fotos para o usuário (assim que elas são carregas, o innerHTML é atualizado)
+  app.innerHTML = /*html*/ `
+    <p>Carregando fotos...</p>
+    <p>(Isso pode demorar um pouco)</p>
+
+  `;
   const response = await fetch("https://jsonplaceholder.typicode.com/photos");
+  if (!response.ok) {
+    return (app.innerHTML = /*html */ `<p>Não foi possível carregar as fotografias. Tente novamente mais tarde</p>
+      <button id="logout" class="btn btn-danger w-25">Sair</button>`);
+  }
   const fotos = await response.json();
 
   //Método slice(), que serve para percorrer o array só até o elemento 10
@@ -33,7 +43,7 @@ async function fotografias() {
   console.log(fotosOrganizadas);
   //Método map(), serve para percorrer a lista e aplicar um elemento para cada array, criando um novo array
   const fotosMapeados = fotosOrganizadas.map((foto) => {
-    return `<div class="card mb-1 background"><p class="titulo">${foto.title}</p> <img src="${foto.thumbnailUrl}" data-url="${foto.url}" class="thumbnail"></div> `;
+    return `<div class="card mb-1 background"><p>${foto.title}</p> <img src="${foto.thumbnailUrl}" data-url="${foto.url}" data-thumbnail="${foto.thumbnailUrl}" class="thumbnail"></div> `;
   });
 
   //Método join(), junta todos os elementos dentrode uma única string e formata o documento
@@ -57,11 +67,15 @@ async function fotografias() {
   //ForEach() para poder acessar cada miniatura e seus atributos dentro do innerHTML
   miniaturas.forEach((foto) => {
     foto.addEventListener("click", () => {
-      foto.src = foto.dataset.url;
-      //Vai selecionar o elemento pai daquele objeto, permitindo pegar o titulo da div daquele elemento
-      const fotoTitulo =
-        foto.parentElement.querySelector(".titulo").textContent;
+      //if para que a thumbnail volte a ser a foto em miniatura (conforme o JSON)
+      if (foto.src !== foto.dataset.url) {
+        foto.src = foto.dataset.url;
+      } else {
+        foto.src = foto.dataset.thumbnail;
+      }
 
+      console.log(foto.src);
+      //Vai selecionar o elemento pai daquele objeto, permitindo pegar o titulo da div daquele elemento
       foto.parentElement.classList.toggle("imagemAumentada");
     });
   });
